@@ -1,0 +1,4 @@
+.env
+.data
+html/*
+!html/.gitkeep

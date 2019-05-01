@@ -1,0 +1,39 @@
+version: '2'
+
+services:
+  woocommerce:
+    container_name: ${PROJECT_NAME}_woocommerce
+    build:
+      context: context/woo
+      args: 
+      - PROJECT_USER=${PROJECT_USER}
+      - PROJECT_GROUP=${PROJECT_GROUP}
+      - PROJECT_USER_ID=${PROJECT_USER_ID}
+      - PROJECT_USER_GID=${PROJECT_USER_GID}
+    volumes: 
+      - ./html:/var/www/html
+    ports: 
+      - 8181:80
+  woo_db:
+    container_name: ${PROJECT_NAME}_db
+    image: mysql:5.7
+    volumes:
+      - ./.data/db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  woo_pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: ${PROJECT_NAME}_pma
+    links:
+      - woo_db:db
+    ports: 
+      - "8080:80"
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: ${PROJECT_NAME}_mailhog
+    ports:
+    - ${SERVICE_MAILHOG_SMTP_EXTERNAL}:${SERVICE_MAILHOG_SMTP_INTERNAL}
+    - ${SERVICE_MAILHOG_UI_EXTERNAL}:${SERVICE_MAILHOG_UI_INTERNAL}
