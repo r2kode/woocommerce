@@ -1,4 +1,62 @@
 .env
 .data
+!html/
 html/*
+!html/wp-content/
+html/wp-content/*
+# !html/wp-content/**/speedcleaner/
+# html/wp-content/themes/*
+# !html/wp-content/themes/speedcleaner/
+
+
 !html/.gitkeep
+# ignore OS generated files
+ehthumbs.db
+Thumbs.db
+
+# ignore Editor files
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite
+
+# ignore compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ignore packaged files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# ignore everything in the "wp-content" directory, except:
+# "mu-plugins" directory
+# "plugins" directory
+# "themes" directory
+html/wp-content/*
+!html/wp-content/mu-plugins/
+!html/wp-content/plugins/
+!html/wp-content/themes/
+
+# ignore these plugins from the core
+wp-content/plugins/hello.php
+wp-content/plugins/akismet/
+
+# ignore specific themes
+wp-content/themes/twenty*/
+
+# ignore node/grunt dependency directories
+node_modules/
